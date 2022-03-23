@@ -5,9 +5,40 @@ let dlugoscSygnalu = 0
 let litera = ""
 let listaA: string[] = []
 let listaM: string[] = []
+listaM = [".-", "-...", "-.-.", "-..", ".", ".._.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", ".-.", "...", "-", "..-", ".--", "-.--", "--.."]
+listaA = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z"]
+sensors.color4.setThreshold(Light.Bright, 90)
+sensors.color4.setThreshold(Light.Dark, 25)
+brick.showImage(images.expressionsZzz)
+forever(function () {
+    console.sendToScreen()
+})
 brick.buttonEnter.onEvent(ButtonEvent.Pressed, function () {
     Menu()
 })
+function Menu() {
+    while (true) {
+        brick.clearScreen()
+        brick.showString("Wybierz opcje:", 2)
+        brick.showString("<: Przekaz sygnal", 4)
+        brick.showString(">: Wyswietl alfabet", 5)
+        if (brick.buttonLeft.isPressed()) {
+            OdczytKodu()
+            break;
+        }
+        if (brick.buttonRight.isPressed()) {
+            WypiszAlfabet()
+            break;
+        }
+    }
+}
+function WypiszAlfabet() {
+    brick.clearScreen()
+    console.log("Alfabet Morse'a:")
+    for (let i = 0; i <= listaM.length - 1; i++) {
+        console.log("" + listaA[i] + ": " + listaM[i])
+    }
+}
 function OdczytKodu() {
     brick.clearScreen()
     console.log("Swiec latarka w sensor swiatla poslugujac sie alfabetem Morse'a.")
@@ -54,22 +85,6 @@ function OdczytSygnalu() {
         znak = ""
     }
 }
-function Menu() {
-    while (true) {
-        brick.clearScreen()
-        brick.showString("Wybierz opcje:", 2)
-        brick.showString("<: Przekaz sygnal", 4)
-        brick.showString(">: Wyswietl alfabet", 5)
-        if (brick.buttonLeft.isPressed()) {
-            OdczytKodu()
-            break;
-        }
-        if (brick.buttonRight.isPressed()) {
-            WypiszAlfabet()
-            break;
-        }
-    }
-}
 function SzukajLitery() {
     for (let j = 0; j <= listaM.length - 1; j++) {
         if (szukana == listaM[j]) {
@@ -77,18 +92,3 @@ function SzukajLitery() {
         }
     }
 }
-function WypiszAlfabet() {
-    brick.clearScreen()
-    console.log("Alfabet Morse'a:")
-    for (let i = 0; i <= listaM.length - 1; i++) {
-        console.log("" + listaA[i] + ": " + listaM[i])
-    }
-}
-listaM = [".-", "-...", "-.-.", "-..", ".", ".._.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", ".-.", "...", "-", "..-", ".--", "-.--", "--.."]
-listaA = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z"]
-sensors.color4.setThreshold(Light.Bright, 90)
-sensors.color4.setThreshold(Light.Dark, 30)
-brick.showImage(images.expressionsZzz)
-forever(function () {
-    console.sendToScreen()
-})
