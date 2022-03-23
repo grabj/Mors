@@ -1,10 +1,7 @@
 {
     "name": "Mors",
     "dependencies": {
-        "ev3": "*",
-        "storage": "*",
-        "broadcast": "*",
-        "automation": "github:microsoft/pxt-automation#v0.0.3"
+        "ev3": "*"
     },
     "description": "",
     "files": [
